@@ -565,8 +565,12 @@ function updateReminderModal() {
   modalUpiDisplay.textContent = `upi://pay?pa=${STATE.merchantUpi}&am=${amount}`;
 
   let message = '';
+  const trimmedName = customerName.trim();
+  const hasHonorific = /\b(ji|bhai|bhaiya|sahab|sir|chacha|uncle)$/i.test(trimmedName);
+  const politeGreeting = hasHonorific ? trimmedName : `${trimmedName} ji`;
+
   if (STATE.activeReminderTone === 'polite') {
-    message = `Namaste ${customerName} ji! 🙏\n\nA gentle reminder from ${STATE.merchantName}. Your balance of Rs ${amount.toFixed(0)}${itemNote} is pending in our khata.\n\nYou can easily clear it via UPI:\n${upiLink}\n\nThank you for your trust! Have a great day.`;
+    message = `Namaste ${politeGreeting}! 🙏\n\nA gentle reminder from ${STATE.merchantName}. Your balance of Rs ${amount.toFixed(0)}${itemNote} is pending in our khata.\n\nYou can easily clear it via UPI:\n${upiLink}\n\nThank you for your trust! Have a great day.`;
   } else if (STATE.activeReminderTone === 'formal') {
     message = `Hello ${customerName},\n\nThis is an automated ledger statement from ${STATE.merchantName}.\nPending Amount: Rs ${amount.toFixed(0)}${itemNote}\n\nPlease settle via UPI:\n${upiLink}\n\nThank you.`;
   } else {

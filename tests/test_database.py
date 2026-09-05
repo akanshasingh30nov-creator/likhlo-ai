@@ -18,6 +18,7 @@ class TestDatabase(unittest.TestCase):
     def tearDown(self):
         self.db.close()
         Base.metadata.drop_all(bind=self.engine)
+        self.engine.dispose()
 
     def test_customer_creation(self):
         cust_id = str(uuid.uuid4())

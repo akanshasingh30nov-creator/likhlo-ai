@@ -4,7 +4,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, Response
 
 from likhlo_ai.config import settings
 from likhlo_ai.database import init_db
@@ -81,6 +81,12 @@ def health_check():
         "database": "sqlite_wal",
         "openai_configured": bool(settings.openai_api_key)
     }
+
+
+@app.get("/favicon.ico", include_in_schema=False)
+def favicon():
+    svg_icon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🎙️</text></svg>'
+    return Response(content=svg_icon, media_type="image/svg+xml")
 
 
 # Mount frontend static directory

@@ -22,7 +22,7 @@ class TestUpiAndReminders(unittest.TestCase):
         self.assertIn("cu=INR", link)
 
     def test_whatsapp_reminder_tones(self):
-        # Polite
+        # Polite with existing honorific 'ji'
         polite_rem = generate_whatsapp_reminder(
             customer_name="Sharma ji",
             phone_number="9876543210",
@@ -30,8 +30,19 @@ class TestUpiAndReminders(unittest.TestCase):
             merchant_name="Gupta Store",
             tone="polite"
         )
-        self.assertIn("Namaste Sharma ji", polite_rem.message_text)
+        self.assertIn("Namaste Sharma ji! 🙏", polite_rem.message_text)
+        self.assertNotIn("ji ji", polite_rem.message_text)
         self.assertIn("https://wa.me/919876543210", polite_rem.whatsapp_deep_link)
+
+        # Polite without existing honorific
+        polite_rem_plain = generate_whatsapp_reminder(
+            customer_name="Ramesh",
+            phone_number="9876543210",
+            amount=100.0,
+            merchant_name="Gupta Store",
+            tone="polite"
+        )
+        self.assertIn("Namaste Ramesh ji! 🙏", polite_rem_plain.message_text)
 
         # Formal
         formal_rem = generate_whatsapp_reminder(
