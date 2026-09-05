@@ -15,6 +15,12 @@
 [![SQLite WAL](https://img.shields.io/badge/Database-SQLite%20WAL-lightgrey.svg)](https://sqlite.org/)
 [![AI Providers](https://img.shields.io/badge/AI%20Providers-Claude%20%7C%20Hermes%20%7C%20Ollama%20%7C%20OpenAI-purple.svg)](https://github.com/akanshasingh30nov-creator/likhlo-ai)
 
+<p align="center">
+  <a href="https://www.producthunt.com/products/likhlo-ai-voice-khata-ledger?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-likhlo-ai-voice-khata-ledger" target="_blank" rel="noopener noreferrer">
+    <img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1242435&theme=light&t=1788650146214" alt="LikhLo AI: Voice Khata & Ledger - Voice-first AI khata & ledger for 63M+ merchants | Product Hunt" width="250" height="54" />
+  </a>
+</p>
+
 ![LikhLo AI Interactive Dashboard](assets/dashboard.png)
 
 ---
