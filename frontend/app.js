@@ -4,7 +4,11 @@
 const STATE = {
   merchantName: localStorage.getItem('likhlo_merchant') || 'Gupta Kirana Store',
   merchantUpi: localStorage.getItem('likhlo_upi') || 'gupta@okhdfcbank',
+  aiProvider: localStorage.getItem('likhlo_ai_provider') || 'offline',
+  anthropicKey: localStorage.getItem('likhlo_anthropic_key') || '',
   openaiKey: localStorage.getItem('likhlo_openai_key') || '',
+  customBase: localStorage.getItem('likhlo_custom_base') || '',
+  customModel: localStorage.getItem('likhlo_custom_model') || 'hermes3',
   activeFilter: 'ALL',
   isRecording: false,
   mediaRecorder: null,
@@ -94,15 +98,37 @@ const saveSettingsBtn = document.getElementById('saveSettingsBtn');
 const resetDataBtn = document.getElementById('resetDataBtn');
 const settingStoreName = document.getElementById('settingStoreName');
 const settingUpiId = document.getElementById('settingUpiId');
+const settingAiProvider = document.getElementById('settingAiProvider');
+const settingAnthropicKey = document.getElementById('settingAnthropicKey');
 const settingOpenAiKey = document.getElementById('settingOpenAiKey');
+const settingCustomBase = document.getElementById('settingCustomBase');
+const settingCustomModel = document.getElementById('settingCustomModel');
+
+const fieldAnthropicKey = document.getElementById('fieldAnthropicKey');
+const fieldOpenAiKey = document.getElementById('fieldOpenAiKey');
+const fieldCustomBase = document.getElementById('fieldCustomBase');
+const fieldCustomModel = document.getElementById('fieldCustomModel');
 const merchantNameDisplay = document.getElementById('merchantNameDisplay');
+
+function updateProviderFieldsVisibility() {
+  const p = settingAiProvider.value;
+  if (fieldAnthropicKey) fieldAnthropicKey.style.display = p === 'anthropic' ? 'block' : 'none';
+  if (fieldOpenAiKey) fieldOpenAiKey.style.display = p === 'openai' ? 'block' : 'none';
+  if (fieldCustomBase) fieldCustomBase.style.display = p === 'hermes' ? 'block' : 'none';
+  if (fieldCustomModel) fieldCustomModel.style.display = p === 'hermes' ? 'block' : 'none';
+}
 
 // Init
 async function init() {
   merchantNameDisplay.textContent = STATE.merchantName;
   settingStoreName.value = STATE.merchantName;
   settingUpiId.value = STATE.merchantUpi;
-  settingOpenAiKey.value = STATE.openaiKey;
+  if (settingAiProvider) settingAiProvider.value = STATE.aiProvider;
+  if (settingAnthropicKey) settingAnthropicKey.value = STATE.anthropicKey;
+  if (settingOpenAiKey) settingOpenAiKey.value = STATE.openaiKey;
+  if (settingCustomBase) settingCustomBase.value = STATE.customBase;
+  if (settingCustomModel) settingCustomModel.value = STATE.customModel;
+  updateProviderFieldsVisibility();
 
   // Try fetching fresh data from backend API
   await fetchTransactionsFromApi();
@@ -223,13 +249,27 @@ function setupEventListeners() {
     setTimeout(() => copyMessageBtn.textContent = 'Copy Message', 2000);
   });
 
+  if (settingAiProvider) {
+    settingAiProvider.addEventListener('change', updateProviderFieldsVisibility);
+  }
+
   saveSettingsBtn.addEventListener('click', () => {
     STATE.merchantName = settingStoreName.value.trim() || 'Gupta Kirana Store';
     STATE.merchantUpi = settingUpiId.value.trim() || 'gupta@okhdfcbank';
-    STATE.openaiKey = settingOpenAiKey.value.trim();
+    STATE.aiProvider = settingAiProvider ? settingAiProvider.value : 'offline';
+    STATE.anthropicKey = settingAnthropicKey ? settingAnthropicKey.value.trim() : '';
+    STATE.openaiKey = settingOpenAiKey ? settingOpenAiKey.value.trim() : '';
+    STATE.customBase = settingCustomBase ? settingCustomBase.value.trim() : '';
+    STATE.customModel = settingCustomModel ? settingCustomModel.value.trim() || 'hermes3' : 'hermes3';
+
     localStorage.setItem('likhlo_merchant', STATE.merchantName);
     localStorage.setItem('likhlo_upi', STATE.merchantUpi);
+    localStorage.setItem('likhlo_ai_provider', STATE.aiProvider);
+    localStorage.setItem('likhlo_anthropic_key', STATE.anthropicKey);
     localStorage.setItem('likhlo_openai_key', STATE.openaiKey);
+    localStorage.setItem('likhlo_custom_base', STATE.customBase);
+    localStorage.setItem('likhlo_custom_model', STATE.customModel);
+
     merchantNameDisplay.textContent = STATE.merchantName;
     settingsModal.classList.remove('active');
     updateMetrics();
@@ -315,15 +355,26 @@ async function handleAudioUpload() {
   processSpokenText('Sharma ji ko 5kg atta udhaar diya 280 baki hai somvaar denge');
 }
 
-// Processing Spoken Text
 async function processSpokenText(text) {
-  recordingStatus.textContent = 'Analyzing voice note...';
+  const providerLabel = STATE.aiProvider === 'offline' ? 'Offline Engine' : STATE.aiProvider.toUpperCase();
+  recordingStatus.textContent = `Analyzing voice note via ${providerLabel}...`;
 
   try {
+    let apiKey = '';
+    if (STATE.aiProvider === 'anthropic') apiKey = STATE.anthropicKey;
+    else if (STATE.aiProvider === 'openai') apiKey = STATE.openaiKey;
+
     const res = await fetch('/api/voice/parse-text', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ transcript: text, auto_save: true })
+      body: JSON.stringify({
+        transcript: text,
+        auto_save: true,
+        provider: STATE.aiProvider,
+        api_key: apiKey || undefined,
+        api_base: STATE.aiProvider === 'hermes' ? (STATE.customBase || undefined) : undefined,
+        model: STATE.aiProvider === 'hermes' ? (STATE.customModel || undefined) : undefined
+      })
     });
     if (res.ok) {
       const tx = await res.json();

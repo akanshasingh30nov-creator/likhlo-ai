@@ -804,9 +804,11 @@ body {
   margin-bottom: 14px;
 }
 
-.form-group input {
+.form-group input,
+.form-group select,
+.form-select {
   width: 100%;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.4);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-sm);
   padding: 10px 14px;
@@ -815,7 +817,13 @@ body {
   outline: none;
 }
 
-.form-group input:focus {
+.form-group select option {
+  background: #0f172a;
+  color: #fff;
+}
+
+.form-group input:focus,
+.form-group select:focus {
   border-color: var(--color-blue);
 }
 

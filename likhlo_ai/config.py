@@ -18,10 +18,22 @@ class Settings(BaseSettings):
     default_merchant_name: str = "Apka Kirana Store"
     default_merchant_upi: str = "merchant@okhdfcbank"
     
-    # OpenAI Model Parameters
+    # AI Provider & Model Parameters
+    ai_provider: str = Field(default="auto", alias="AI_PROVIDER")
+    
+    # OpenAI Settings
     openai_api_key: str = Field(default="", alias="OPENAI_API_KEY")
     openai_model: str = "gpt-4o-mini"
     whisper_model: str = "whisper-1"
+    
+    # Anthropic (Claude) Settings
+    anthropic_api_key: str = Field(default="", alias="ANTHROPIC_API_KEY")
+    anthropic_model: str = "claude-3-5-haiku-20241022"
+    
+    # Custom / Open-Source / Hermes / Ollama / OpenRouter Settings
+    custom_api_base: str = Field(default="", alias="CUSTOM_API_BASE")
+    custom_api_key: str = Field(default="", alias="CUSTOM_API_KEY")
+    custom_model_name: str = Field(default="hermes3", alias="CUSTOM_MODEL_NAME")
     
     # Audio Limits
     max_audio_size_mb: int = 10

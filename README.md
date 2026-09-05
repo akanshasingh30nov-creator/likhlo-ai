@@ -7,7 +7,7 @@
 [![Python: 3.10+](https://img.shields.io/badge/Python-3.10+-brightgreen.svg)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-teal.svg)](https://fastapi.tiangolo.com/)
 [![SQLite WAL](https://img.shields.io/badge/Database-SQLite%20WAL-lightgrey.svg)](https://sqlite.org/)
-[![OpenAI: Whisper%20%2B%20GPT--4o](https://img.shields.io/badge/OpenAI-Whisper%20%2B%20GPT--4o-orange.svg)](https://openai.com/)
+[![AI Providers](https://img.shields.io/badge/AI%20Providers-Claude%20%7C%20Hermes%20%7C%20Ollama%20%7C%20OpenAI-purple.svg)](https://github.com/akanshasingh30nov-creator/likhlo-ai)
 
 ![LikhLo AI Interactive Dashboard](assets/dashboard.png)
 
@@ -36,6 +36,7 @@ And every day, merchants face the same painful breakdown:
 | **Itemized Tracking** | Hidden behind complex invoice screens | None (lump-sum only) | Full SKU invoice dropdowns | **Auto-extracted goods & quantities from speech** |
 | **Payment Reminders** | Robotic, generic SMS/WhatsApp | Aggressive loan/debt collection alerts | Generic WhatsApp invoice link | **3 culturally calibrated vernacular tones + dynamic UPI** |
 | **Offline Resilience** | Patchy; sync conflicts in poor connectivity | Requires active internet for updates | Local desktop DB, but mobile sync breaks | **Offline-first SQLite WAL + LocalStorage dual engine** |
+| **AI Freedom** | Closed proprietary server | Closed proprietary server | None | **Universal (Claude, Hermes, Ollama, OpenAI, Offline)** |
 | **Bloat & Privacy** | Heavy NBFC loan cross-selling & popups | Third-party loan collection spam | Expensive annual subscription (₹2,500+) | **Zero bloat, open-source MIT utility** |
 
 ---
@@ -49,12 +50,16 @@ graph TD
     Ingest --> Whisper[OpenAI Whisper Acoustic Pipeline]
     Whisper --> Transcript[Raw Code-Mixed Text]
     
-    Transcript --> UnifiedParser{Unified Parser Engine}
-    UnifiedParser -->|Cloud Mode| LLMParser[GPT-4o-mini Structured Outputs]
-    UnifiedParser -->|Offline Mode| HeuristicParser[Deterministic Vernacular NLP Engine]
+    Transcript --> UnifiedParser{Universal Multi-Provider Engine}
+    UnifiedParser -->|Anthropic| Claude[Claude 3.5 Haiku / Sonnet]
+    UnifiedParser -->|Hermes / Ollama| OpenLLM[Hermes 3 / Llama 3.3 / Groq]
+    UnifiedParser -->|OpenAI| GPT[GPT-4o-mini Structured Outputs]
+    UnifiedParser -->|Offline Fallback| Heuristics[Deterministic Vernacular NLP Engine]
     
-    LLMParser --> PydanticRecord[Pydantic Validated ExtractedTransaction]
-    HeuristicParser --> PydanticRecord
+    Claude --> PydanticRecord[Pydantic Validated ExtractedTransaction]
+    OpenLLM --> PydanticRecord
+    GPT --> PydanticRecord
+    Heuristics --> PydanticRecord
     
     PydanticRecord --> SQLite[(SQLite WAL ACID Database)]
     PydanticRecord --> ClientStorage[(Browser LocalStorage Sync)]
@@ -74,8 +79,13 @@ graph TD
 * **Automatic Itemization Without Invoice Forms:** Captures both the aggregate amount AND itemized line items (*Atta 5kg, Milk 2 pkt*) so credit disputes never happen.
 * **Culturally Calibrated Vernacular Reminders:** Generates 3 relationship-preserving tones (Polite & Respectful, Friendly/Casual, Formal Ledger) in natural conversational Hinglish.
 * **1-Click Dynamic UPI Payment Links:** Automatically calculates and embeds standard NPCI UPI links (`upi://pay?pa=...&am=...`) directly inside WhatsApp messages.
-* **Offline-First Resilience:** Functions 100% out of the box using built-in deterministic NLP heuristics without requiring an internet connection or OpenAI API key.
+* **Universal Multi-Provider AI (Claude, Hermes, Ollama, OpenAI):** Choose between Anthropic Claude 3.5 Haiku, local Nous Hermes 3 via Ollama, OpenAI GPT-4o-mini, or zero-latency offline heuristics. Zero vendor lock-in.
+* **Offline-First Resilience:** Functions 100% out of the box using built-in deterministic NLP heuristics without requiring an internet connection or any API key.
 * **Zero Bloat & 100% Data Ownership:** No predatory loan popups, no invasive phonebook permissions, and full CSV export for accountants and tax filings.
+
+<p align="center">
+  <img src="assets/multi_provider_settings.png" alt="Universal Multi-Provider AI Settings" width="700" />
+</p>
 
 <p align="center">
   <img src="assets/whatsapp_modal.png" alt="WhatsApp Polite Udhaar Reminder & Dynamic UPI" width="700" />

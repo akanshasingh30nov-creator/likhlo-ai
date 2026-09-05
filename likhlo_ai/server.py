@@ -79,7 +79,13 @@ def health_check():
         "tagline": settings.app_tagline,
         "version": settings.app_version,
         "database": "sqlite_wal",
-        "openai_configured": bool(settings.openai_api_key)
+        "default_ai_provider": settings.ai_provider,
+        "providers": {
+            "offline_heuristics": True,
+            "openai": bool(settings.openai_api_key),
+            "anthropic": bool(settings.anthropic_api_key),
+            "hermes_ollama": bool(settings.custom_api_base or settings.custom_api_key)
+        }
     }
 
 

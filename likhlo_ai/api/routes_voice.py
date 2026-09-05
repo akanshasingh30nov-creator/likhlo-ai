@@ -2,6 +2,7 @@ import os
 import uuid
 import shutil
 import tempfile
+from typing import Optional
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, File
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
@@ -20,6 +21,10 @@ transcriber = WhisperTranscriber()
 class ParseTextPayload(BaseModel):
     transcript: str
     auto_save: bool = True
+    provider: Optional[str] = None
+    api_key: Optional[str] = None
+    api_base: Optional[str] = None
+    model: Optional[str] = None
 
 
 def save_extracted_to_db(extracted: ExtractedTransaction, db: Session) -> str:
@@ -85,7 +90,13 @@ def parse_spoken_text(payload: ParseTextPayload, db: Session = Depends(get_db)):
     if not text:
         raise HTTPException(status_code=400, detail="Transcript text cannot be empty")
 
-    extracted = parser.parse(text)
+    extracted = parser.parse(
+        text,
+        provider=payload.provider,
+        api_key=payload.api_key,
+        api_base=payload.api_base,
+        model=payload.model
+    )
     if payload.auto_save:
         save_extracted_to_db(extracted, db)
 

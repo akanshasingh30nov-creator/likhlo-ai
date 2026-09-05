@@ -178,10 +178,36 @@
           <input type="text" id="settingUpiId" value="gupta@okhdfcbank">
         </div>
         <div class="form-group">
-          <label for="settingOpenAiKey">OpenAI API Key (Optional):</label>
-          <input type="password" id="settingOpenAiKey" placeholder="sk-... (Leave empty for built-in rule engine)">
-          <small class="help-text">LikhLo AI works 100% offline out-of-the-box using its built-in Indian retail dialect parser.</small>
+          <label for="settingAiProvider">AI Intelligence Engine:</label>
+          <select id="settingAiProvider" class="form-select">
+            <option value="offline">⚡ Built-in Offline Engine (Free, 0ms, Zero Internet)</option>
+            <option value="anthropic">🟣 Anthropic Claude (Claude 3.5 Haiku / Sonnet)</option>
+            <option value="openai">🟢 OpenAI (GPT-4o-mini / Whisper)</option>
+            <option value="hermes">🦙 Hermes & Open Models (Ollama, Groq, OpenRouter)</option>
+          </select>
         </div>
+
+        <div class="form-group provider-field" id="fieldAnthropicKey">
+          <label for="settingAnthropicKey">Anthropic API Key:</label>
+          <input type="password" id="settingAnthropicKey" placeholder="sk-ant-api03-...">
+        </div>
+
+        <div class="form-group provider-field" id="fieldOpenAiKey">
+          <label for="settingOpenAiKey">OpenAI API Key:</label>
+          <input type="password" id="settingOpenAiKey" placeholder="sk-proj-...">
+        </div>
+
+        <div class="form-group provider-field" id="fieldCustomBase">
+          <label for="settingCustomBase">API Base URL (Ollama / Groq / OpenRouter):</label>
+          <input type="text" id="settingCustomBase" placeholder="http://localhost:11434/v1 or https://openrouter.ai/api/v1">
+        </div>
+
+        <div class="form-group provider-field" id="fieldCustomModel">
+          <label for="settingCustomModel">Model Name (e.g. hermes3, llama3.3):</label>
+          <input type="text" id="settingCustomModel" placeholder="hermes3">
+        </div>
+        
+        <small class="help-text">LikhLo AI is 100% vendor-agnostic. If any cloud model fails or times out, the local offline heuristic engine instantly logs the entry so no transaction is ever dropped.</small>
       </div>
       <div class="modal-footer">
         <button class="btn-secondary" id="resetDataBtn">Reset Demo Data</button>
