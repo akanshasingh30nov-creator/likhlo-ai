@@ -65,7 +65,7 @@ graph TD
 
 ---
 
-## ✨ What LikhLo AI Delivers
+## What LikhLo AI Delivers
 
 * **5-Second Hands-Free Voice Ingestion:** Tap the mic and speak naturally in Hindi, Hinglish, or English:
   > *"Sharma ji ko 5kg atta aur 2 packet doodh udhaar diya, 280 baki hai, somvaar denge"*
