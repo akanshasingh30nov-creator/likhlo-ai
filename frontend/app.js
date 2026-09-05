@@ -1,5 +1,5 @@
 // LikhLo AI - Frontend Client Architecture
-// "Bhaiya, Likh Lo!" - Built by Akansha Singh
+// "Bhaiya, Likh Lo!" - Open-Source Voice Khata Copilot
 
 const STATE = {
   merchantName: localStorage.getItem('likhlo_merchant') || 'Gupta Kirana Store',

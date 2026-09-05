@@ -44,7 +44,7 @@ Would love to hear your thoughts, feedback on the dual-engine parser, and pull r
 ```text
 Hello Product Hunt community! 👋
 
-I'm Akansha Singh, creator of LikhLo AI.
+We are the contributors behind LikhLo AI.
 
 Across India and emerging markets, millions of small neighborhood stores still rely on loose paper chits to track customer credit. Digital ledger apps forced them to type names, search phonebooks, and enter numbers during peak rushes.
 
@@ -112,7 +112,7 @@ Clean FastAPI backend, SQLite WAL, and responsive dark-mode UI.
 Star the repo on GitHub:
 👉 https://github.com/akanshasingh30nov-creator/likhlo-ai
 
-Built by @AkanshaSingh
+Built by the LikhLo AI Open-Source Community
 #OpenSource #VoiceAI #Fintech #Claude35 #Hermes #FastAPI
 ```
 

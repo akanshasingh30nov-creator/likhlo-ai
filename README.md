@@ -205,15 +205,6 @@ If you find LikhLo AI useful or believe in empowering small neighborhood merchan
 
 ---
 
-## 👤 Author
-
-**Akansha Singh**  
-Product Marketing & Brand Strategist | AI & Consumer Intelligence  
-*Ex-Zomato | Seth M. R. Jaipuria Schools*  
-LinkedIn: [linkedin.com/in/akanshasinghurl](https://www.linkedin.com/in/akanshasinghurl)
-
----
-
 ## ⚖️ Trademark Disclaimer
 
 Khatabook, OkCredit, and Vyapar are trademarks or registered trademarks of their respective holders. Reference to these products in this repository is strictly for nominative competitive analysis, architectural comparison, and educational purposes under the fair use doctrine. LikhLo AI is an independent open-source project and has no affiliation, sponsorship, or endorsement by any of these entities.

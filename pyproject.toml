@@ -8,7 +8,7 @@ version = "1.0.0"
 description = "Bhaiya, Likh Lo! Voice-First AI Khata & Ledger Copilot for 63M+ Micro-Merchants"
 readme = "README.md"
 authors = [
-  { name = "Akansha Singh", email = "akanshasingh@alumni.upenn.edu" }
+  { name = "LikhLo AI Open Source Community" }
 ]
 license = "MIT"
 requires-python = ">=3.10"
