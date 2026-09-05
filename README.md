@@ -9,6 +9,8 @@
 [![SQLite WAL](https://img.shields.io/badge/Database-SQLite%20WAL-lightgrey.svg)](https://sqlite.org/)
 [![OpenAI: Whisper%20%2B%20GPT--4o](https://img.shields.io/badge/OpenAI-Whisper%20%2B%20GPT--4o-orange.svg)](https://openai.com/)
 
+![LikhLo AI Interactive Dashboard](assets/dashboard.png)
+
 ---
 
 ## 💡 The Real Problem Solved
@@ -75,13 +77,17 @@ graph TD
 * **Offline-First Resilience:** Functions 100% out of the box using built-in deterministic NLP heuristics without requiring an internet connection or OpenAI API key.
 * **Zero Bloat & 100% Data Ownership:** No predatory loan popups, no invasive phonebook permissions, and full CSV export for accountants and tax filings.
 
+<p align="center">
+  <img src="assets/whatsapp_modal.png" alt="WhatsApp Polite Udhaar Reminder & Dynamic UPI" width="700" />
+</p>
+
 ---
 
 ## 🚀 Quickstart
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/akanshasingh/likhlo-ai.git
+git clone https://github.com/akanshasingh30nov-creator/likhlo-ai.git
 cd likhlo-ai
 ```
 
