@@ -3,8 +3,10 @@
 > **"Bhaiya, Likh Lo!" • Voice-First AI Khata & Ledger Copilot for 63M+ Micro-Merchants**  
 > *Built from real competitive teardowns (Khatabook, OkCredit, Vyapar App). Zero typing. Zero bloat. 100% offline resilient.*
 
+[![CI Test Suite](https://github.com/akanshasingh30nov-creator/likhlo-ai/actions/workflows/ci.yml/badge.svg)](https://github.com/akanshasingh30nov-creator/likhlo-ai/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Python: 3.10+](https://img.shields.io/badge/Python-3.10+-brightgreen.svg)](https://www.python.org/)
+[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED.svg?logo=docker&logoColor=white)](Dockerfile)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-teal.svg)](https://fastapi.tiangolo.com/)
 [![SQLite WAL](https://img.shields.io/badge/Database-SQLite%20WAL-lightgrey.svg)](https://sqlite.org/)
 [![AI Providers](https://img.shields.io/badge/AI%20Providers-Claude%20%7C%20Hermes%20%7C%20Ollama%20%7C%20OpenAI-purple.svg)](https://github.com/akanshasingh30nov-creator/likhlo-ai)
@@ -95,25 +97,27 @@ graph TD
 
 ## 🚀 Quickstart
 
-### 1. Clone the Repository
+### Option A: 1-Command Docker Run (Recommended)
+```bash
+docker compose up -d
+```
+Open `http://localhost:8000` in your browser.
+
+---
+
+### Option B: Local Python Environment
 ```bash
 git clone https://github.com/akanshasingh30nov-creator/likhlo-ai.git
 cd likhlo-ai
-```
 
-### 2. Set Up Virtual Environment & Dependencies
-```bash
 python -m venv .venv
 source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 pip install -r requirements.txt
-```
+pip install -e .
 
-### 3. Run the Application
-```bash
 python -m uvicorn likhlo_ai.server:app --host 127.0.0.1 --port 8000 --reload
 ```
-
-Open your browser at `http://127.0.0.1:8000` to interact with the full dashboard!
+Open `http://127.0.0.1:8000` in your browser.
 
 ---
 
@@ -174,6 +178,26 @@ likhlo-ai/
 ├── LICENSE                    # MIT Open Source License
 └── README.md                  # Project documentation
 ```
+
+---
+
+## 🤝 Contributing
+
+We welcome community contributions, especially adding new Indian regional languages (Tamil, Telugu, Bengali, Kannada, Marathi, Gujarati) and global translations (Spanish, Bahasa Indonesia, Tagalog)!
+
+Please read our [Contributing Guide](CONTRIBUTING.md) to get started.
+
+---
+
+## 🌟 Star History
+
+If you find LikhLo AI useful or believe in empowering small neighborhood merchants with open technology, please give this repository a star!
+
+<p align="center">
+  <a href="https://star-history.com/#akanshasingh30nov-creator/likhlo-ai&Date">
+    <img src="https://api.star-history.com/svg?repos=akanshasingh30nov-creator/likhlo-ai&type=Date" alt="Star History Chart" width="700" />
+  </a>
+</p>
 
 ---
 

@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  likhlo-ai:
+    build: .
+    image: likhlo-ai:latest
+    container_name: likhlo-ai-app
+    ports:
+      - "8000:8000"
+    environment:
+      - AI_PROVIDER=auto
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - CUSTOM_API_BASE=${CUSTOM_API_BASE:-http://host.docker.internal:11434/v1}
+      - CUSTOM_MODEL_NAME=${CUSTOM_MODEL_NAME:-hermes3}
+    volumes:
+      # Persist SQLite WAL database across container restarts
+      - likhlo_data:/root/.likhlo_ai
+    restart: unless-stopped
+
+volumes:
+  likhlo_data:
+    name: likhlo_khata_storage
