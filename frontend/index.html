@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LikhLo AI - Bhaiya, Likh Lo! (Voice-First AI Khata & Ledger)</title>
+  <meta name="description" content="LikhLo AI: Voice-first AI bookkeeping and khata copilot for 63M+ micro-merchants. Just speak 'Bhaiya, likh lo' in Hindi or Hinglish to log sales, credit (udhaar), and send polite WhatsApp reminders.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Navigation Header -->
+    <header class="app-header">
+      <div class="logo-group">
+        <div class="logo-icon">🎙️</div>
+        <div>
+          <h1 class="logo-title">LikhLo<span>AI</span></h1>
+          <p class="logo-tagline">"Bhaiya, Likh Lo!" • Voice Khata Copilot</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <div class="merchant-badge" id="merchantBadge">
+          <span class="status-dot"></span>
+          <span id="merchantNameDisplay">Gupta Kirana Store</span>
+        </div>
+        <button class="export-btn" id="exportCsvBtn" title="Download Excel/CSV Ledger">📥 Export CSV</button>
+        <button class="settings-btn" id="settingsBtn" title="Settings">⚙️</button>
+      </div>
+    </header>
+
+    <!-- Financial Health Overview Cards -->
+    <section class="metrics-grid">
+      <div class="metric-card cash-in">
+        <div class="metric-label">Cash In (Today)</div>
+        <div class="metric-value" id="cashInTotal">₹0</div>
+        <div class="metric-sub" id="cashInCount">0 sales recorded</div>
+      </div>
+      <div class="metric-card pending-udhaar">
+        <div class="metric-label">Pending Udhaar (Credit)</div>
+        <div class="metric-value" id="pendingUdhaarTotal">₹0</div>
+        <div class="metric-sub" id="debtorsCount">0 customers owe you</div>
+      </div>
+      <div class="metric-card cash-out">
+        <div class="metric-label">Expenses / Stock Out</div>
+        <div class="metric-value" id="cashOutTotal">₹0</div>
+        <div class="metric-sub" id="expensesCount">0 payouts</div>
+      </div>
+      <div class="metric-card net-balance">
+        <div class="metric-label">Net Liquidity</div>
+        <div class="metric-value" id="netBalanceTotal">₹0</div>
+        <div class="metric-sub">Daily Cash Position</div>
+      </div>
+    </section>
+
+    <!-- Voice Recording Hub -->
+    <section class="voice-hub">
+      <div class="voice-card">
+        <div class="voice-card-header">
+          <h2>Bolo Aur Likh Lo (Speak to Log)</h2>
+          <span class="language-pill">Hinglish • Hindi • English</span>
+        </div>
+
+        <!-- Real-Time Waveform -->
+        <div class="waveform-container" id="waveformContainer">
+          <canvas id="waveformCanvas" width="500" height="60"></canvas>
+          <div class="recording-status" id="recordingStatus">Tap microphone to speak (e.g., "Sharma ji 5kg atta udhaar ₹280")</div>
+        </div>
+
+        <!-- Tactile Microphone Button -->
+        <div class="mic-controls">
+          <button class="mic-btn" id="micBtn" aria-label="Start recording voice note">
+            <span class="mic-icon">🎤</span>
+          </button>
+        </div>
+
+        <!-- Preset Test Audio Scenarios for Instant 1-Click Verification -->
+        <div class="preset-scenarios">
+          <div class="presets-label">Quick Real-World Voice Scenarios (Click to test instantly):</div>
+          <div class="presets-chips">
+            <button class="chip" data-scenario="sharma">"Sharma ji ko 5kg atta udhaar diya, 280 baki hai, somvaar denge"</button>
+            <button class="chip" data-scenario="ramesh">"Ramesh ne 500 rupaye cash diya 2 packet tel ke liye"</button>
+            <button class="chip" data-scenario="gupta">"Gupta ji ne purana 1200 rupaye jama karaya, hisab clear"</button>
+            <button class="chip" data-scenario="mandi">"Mandi mein 2500 rupaye kharcha hua wholesale dal ke liye"</button>
+          </div>
+        </div>
+
+        <!-- Manual Text Input Fallback -->
+        <div class="text-input-row">
+          <input type="text" id="manualTextInput" placeholder="Or type voice note: e.g. Ramesh paid 500 cash for cooking oil...">
+          <button class="btn-primary" id="processTextBtn">Log Khata</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Transaction Ledger Feed Section -->
+    <section class="ledger-section">
+      <div class="ledger-header">
+        <h2>Bahi-Khata (Transaction Ledger)</h2>
+        <div class="filter-tabs">
+          <button class="tab-btn active" data-filter="ALL">All (<span id="countAll">0</span>)</button>
+          <button class="tab-btn" data-filter="CREDIT">Pending Udhaar (<span id="countCredit">0</span>)</button>
+          <button class="tab-btn" data-filter="CASH_SALE">Cash Sales (<span id="countCash">0</span>)</button>
+          <button class="tab-btn" data-filter="PAYMENT_RECEIVED">Repayments (<span id="countRepay">0</span>)</button>
+          <button class="tab-btn" data-filter="DEBIT">Expenses (<span id="countExpense">0</span>)</button>
+        </div>
+      </div>
+
+      <div class="ledger-feed" id="ledgerFeed">
+        <!-- Dynamic transaction cards rendered here -->
+      </div>
+    </section>
+  </div>
+
+  <!-- WhatsApp Reminder Modal -->
+  <div class="modal-overlay" id="reminderModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>WhatsApp Polite Udhaar Reminder</h3>
+        <button class="close-btn" id="closeModalBtn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="reminder-customer-info">
+          <div class="customer-avatar" id="modalCustomerAvatar">S</div>
+          <div>
+            <h4 id="modalCustomerName">Sharma ji</h4>
+            <p class="modal-due-badge" id="modalDueAmount">₹280.00 Pending</p>
+          </div>
+        </div>
+
+        <div class="tone-selector">
+          <label>Tone:</label>
+          <div class="tone-buttons">
+            <button class="tone-btn active" data-tone="polite">Polite & Respectful</button>
+            <button class="tone-btn" data-tone="friendly">Casual / Friendly</button>
+            <button class="tone-btn" data-tone="formal">Formal Ledger</button>
+          </div>
+        </div>
+
+        <div class="message-preview-box">
+          <label>Message Preview:</label>
+          <textarea id="modalMessageText" rows="6" readonly></textarea>
+        </div>
+
+        <div class="upi-preview">
+          <div class="upi-info">
+            <span class="upi-icon">⚡</span>
+            <span>Includes 1-Click Dynamic UPI Payment Link: <code id="modalUpiDisplay">upi://pay?...</code></span>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" id="copyMessageBtn">Copy Message</button>
+        <a class="btn-whatsapp" id="sendWhatsAppBtn" target="_blank" rel="noopener noreferrer">
+          <span>💬 Open in WhatsApp</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Settings Modal -->
+  <div class="modal-overlay" id="settingsModal">
+    <div class="modal-card settings-card">
+      <div class="modal-header">
+        <h3>Merchant Settings</h3>
+        <button class="close-btn" id="closeSettingsBtn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="settingStoreName">Shop / Merchant Name:</label>
+          <input type="text" id="settingStoreName" value="Gupta Kirana Store">
+        </div>
+        <div class="form-group">
+          <label for="settingUpiId">Your UPI ID (For payment links):</label>
+          <input type="text" id="settingUpiId" value="gupta@okhdfcbank">
+        </div>
+        <div class="form-group">
+          <label for="settingOpenAiKey">OpenAI API Key (Optional):</label>
+          <input type="password" id="settingOpenAiKey" placeholder="sk-... (Leave empty for built-in rule engine)">
+          <small class="help-text">LikhLo AI works 100% offline out-of-the-box using its built-in Indian retail dialect parser.</small>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" id="resetDataBtn">Reset Demo Data</button>
+        <button class="btn-primary" id="saveSettingsBtn">Save Settings</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
