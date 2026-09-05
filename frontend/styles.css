@@ -71,11 +71,11 @@ body {
 }
 
 .app-logo-img {
-  width: 48px;
-  height: 48px;
-  border-radius: var(--radius-md);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(245, 158, 11, 0.3);
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
+  border: 2px solid rgba(245, 158, 11, 0.45);
   object-fit: cover;
 }
 

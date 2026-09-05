@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/logo.png" alt="LikhLo AI Official Logo" width="160" />
+  <img src="assets/logo.png" alt="LikhLo AI Official Logo" width="200" />
 </p>
 
 # 🎙️ LikhLo AI
