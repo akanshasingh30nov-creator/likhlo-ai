@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/logo.png" alt="LikhLo AI Official Logo" width="160" />
+</p>
+
 # 🎙️ LikhLo AI
 
 > **"Bhaiya, Likh Lo!" • Voice-First AI Khata & Ledger Copilot for 63M+ Micro-Merchants**  

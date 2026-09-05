@@ -70,6 +70,15 @@ body {
   gap: 14px;
 }
 
+.app-logo-img {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  object-fit: cover;
+}
+
 .logo-icon {
   font-size: 28px;
   background: rgba(59, 130, 246, 0.15);
