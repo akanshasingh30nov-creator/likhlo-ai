@@ -10,7 +10,7 @@ readme = "README.md"
 authors = [
   { name = "Akansha Singh", email = "akanshasingh@alumni.upenn.edu" }
 ]
-license = { text = "MIT" }
+license = "MIT"
 requires-python = ">=3.10"
 keywords = [
   "voice-ai",
@@ -40,6 +40,11 @@ dev = [
   "pytest>=7.0.0",
   "flake8>=6.0.0"
 ]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["likhlo_ai*"]
+exclude = ["assets*", "frontend*", "tests*"]
 
 [tool.pytest.ini_options]
 pythonpath = ["."]

@@ -13,3 +13,6 @@ venv/
 *.m4a
 *.db
 *.sqlite3
+*.egg-info/
+dist/
+build/
