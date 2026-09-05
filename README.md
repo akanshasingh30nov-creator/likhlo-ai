@@ -214,6 +214,12 @@ LinkedIn: [linkedin.com/in/akanshasinghurl](https://www.linkedin.com/in/akanshas
 
 ---
 
+## ⚖️ Trademark Disclaimer
+
+Khatabook, OkCredit, and Vyapar are trademarks or registered trademarks of their respective holders. Reference to these products in this repository is strictly for nominative competitive analysis, architectural comparison, and educational purposes under the fair use doctrine. LikhLo AI is an independent open-source project and has no affiliation, sponsorship, or endorsement by any of these entities.
+
+---
+
 ## 📄 License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.

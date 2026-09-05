@@ -16,7 +16,7 @@ Hi HN! I built LikhLo AI ("Bhaiya, Likh Lo!"), a voice-first, offline-first digi
 
 Over 63 million micro-merchants in India run on credit (udhaar). Existing apps like Khatabook and OkCredit raised hundreds of millions of dollars, but they made a fatal assumption: that shopkeepers have time to tap through 6 smartphone screens to log a transaction while 5 customers are shouting orders.
 
-When things get busy, shopkeepers don't tap screens—they shout "Bhaiya, likh lo!" (Brother, write it down in the ledger).
+When things get busy, shopkeepers don't tap screens - they shout "Bhaiya, likh lo!" (Brother, write it down in the ledger).
 
 LikhLo AI solves this with voice-first architecture:
 1. Universal Multi-Provider Engine: Runs on Anthropic Claude 3.5 Haiku, local Nous Hermes 3 via Ollama (for 100% private, zero-cost local inference), or OpenAI GPT-4o-mini.
@@ -53,7 +53,7 @@ We built LikhLo AI to bring voice-first, touchless bookkeeping to micro-merchant
 🧠 Pluggable AI freedom: Claude 3.5 Haiku, local Hermes 3 via Ollama, or built-in offline heuristics
 📦 Auto-extracted itemization to prevent debt disputes
 💬 Relationship-preserving WhatsApp reminders with 1-click dynamic UPI links
-🔒 Local SQLite WAL persistence—no cloud lock-in or ads
+🔒 Local SQLite WAL persistence - no cloud lock-in or ads
 
 It is completely open-source (MIT). Try it out, star the repo, and let us know what you think!
 ```
